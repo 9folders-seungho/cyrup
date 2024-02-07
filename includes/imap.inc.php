@@ -91,7 +91,13 @@
                 list( $muser, $mdomain ) = explode('@', $mbox_name);
                 $path = $muser.CYRUS_DELIMITER.$folder.'@'.$mdomain;
             }
-            cimap_command('create user'.CYRUS_DELIMITER.$path);
+            #https://www.rfc-editor.org/rfc/rfc6154.html#page-8
+            $special_use = $folder;
+            if ($folder == "Spam") {
+                $special_use = 'Junk';
+            }
+            $command = 'create user'.CYRUS_DELIMITER.$path.' (USE (\\'.$special_use.'))';
+            cimap_command($command);
         }
     }
 

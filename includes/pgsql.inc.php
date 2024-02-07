@@ -18,9 +18,9 @@
        return pg_escape_literal($str);
     }
 
-    function sql_connect( $database=SQL_DB, $username=SQL_USER, $password=SQL_PASS ) {
-        DEBUG( D_FUNCTION, "sql_connect('$database', '$username', '\$password')" );
-        @pg_connect("host=127.0.0.1 dbname=$database user=$username password=$password" ) or sql_die( "pg_connect(): Couldn't connect to the database" );
+    function sql_connect( $host=SQL_HOST, $database=SQL_DB, $username=SQL_USER, $password=SQL_PASS ) {
+        DEBUG( D_FUNCTION, "sql_connect('$host', '$database', '$username', '\$password')" );
+        @pg_connect("host=$host dbname=$database user=$username password=$password" ) or sql_die( "pg_connect(): Couldn't connect to the database" );
     }
 
     function sql_query( $query ) {
